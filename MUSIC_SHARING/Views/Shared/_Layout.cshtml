@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuck you !</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">I Must Go</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <div class="navbar-form navbar-left">
+                    <input type="text" placeholder="Search any thing !" class="form-control">
+                    <span class="glyphicon glyphicon-search search-icon"></span>
+                </div>
+                <div class="tab-section navbar-left">
+                    <ul class="nav navbar-nav">
+                        <li><a id="music-index-tab" href="#music">Music</a></li>
+                        <li><a id="music-all-song-tab"  href="#all-song">All Song</a></li>
+                    </ul>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="music-upload-tab"><a href="#upload-music">Upload Music</a></li>
+                    <li><a href="#music">Notification</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main-section">
+        <!-- Left menu -->
+        <div class="left-col">
+            @Html.Partial("~/Views/Shared/_LeftCol.cshtml")
+        </div>
+        <!-- Center -->
+        <div class="container body-content right-col">
+            @RenderBody()
+        </div>
+    </div>
+
+   
+</body>
+</html>

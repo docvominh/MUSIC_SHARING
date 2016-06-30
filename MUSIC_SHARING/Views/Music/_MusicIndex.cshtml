@@ -1,0 +1,202 @@
+﻿@using MUSIC_SHARING.MUSIC_SHARING.DTO;
+@model MUSIC_SHARING.MUSIC_SHARING_DTO.HomeDTO
+@{
+    int countA = 1;
+    int countB = 1;
+}
+
+<div class="col-md-6 border-right height-100-percent padding-top-10">
+    <div id="now-play" class="row">
+
+        <label>Song name + Artist</label>
+        <audio id="music-play" controls>
+            <source id="music-source" src="" type="audio/mpeg" />
+        </audio>
+        @*<button onclick="document.getElementById('demo').play()">Play the Audio</button>
+            <button onclick="document.getElementById('demo').pause()">Pause the Audio</button>
+            <button onclick="document.getElementById('demo').volume+=0.1">Increase Volume</button>
+            <button onclick="document.getElementById('demo').volume-=0.1">Decrease Volume</button>*@
+        <br />
+        <label>Upload By :</label><br />
+        <label>Upload Date :</label><br />
+        <label>Number of listen :</label>
+    </div>
+    <hr />
+
+
+    <div id="song-list" class="row">
+        <label>Song list</label>
+
+        @foreach (SongDTO song in Model.UserDefaultList)
+        {
+            <div class="col-md-12 no-padding inline-block song-item">
+                <div class="col-md-1 no-padding text-center song-chart">
+                    <span class="glyphicon glyphicon-tree-deciduous"></span>
+                </div>
+
+                <div class="col-md-9 no-padding">
+                    <div class="col-md-12">
+                        <div class="col-md-10 song-name no-padding">@song.SONG_NAME</div>
+                        <div class="col-md-2 duration">@song.GetMinutes()</div>
+                    </div>
+                    <div class="col-md-12 artist"> @song.ARTIST</div>
+                </div>
+
+                <div class="col-md-2 no-padding text-center song-action">
+                    <button title="Play this song" class="play-button" data-songid="@song.SONG_ID"><span class="glyphicon glyphicon-play"></span></button>&nbsp;&nbsp;
+                    <button title="Remove from list" class="remove-button" data-songid="@song.SONG_ID"><span class="glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+            <hr />
+            countA++;
+        }
+
+
+
+        @*<div class="col-md-12 no-padding inline-block song-item">
+            <div class="col-md-1 no-padding text-center song-chart">
+                <span class="glyphicon glyphicon-tree-deciduous"></span>
+            </div>
+
+            <div class="col-md-9 no-padding">
+                <div class="col-md-12">
+                    <div class="col-md-10 song-name no-padding">I don't want to miss a thing</div>
+                    <div class="col-md-2 duration">3:40</div>
+                </div>
+                <div class="col-md-12 artist"> artist</div>
+            </div>
+
+            <div class="col-md-2 no-padding text-center song-action">
+                <button><span class="glyphicon glyphicon-play"></span></button>&nbsp;&nbsp;
+                <button><span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+        </div>*@
+
+    </div>
+
+
+
+
+
+</div>
+
+<div class="col-md-6 height-100-percent padding-top-10">
+
+    <div id="tabs" class="col-md-12 no-padding">
+        <div id="tabs-nav" class="col-md-12 no-padding">
+            <div class="col-md-4 taps-nav no-padding"><button id="top-listen-fpt-tab" class="tabs-button" type="button">Top Listen FPT</button></div>
+            <div class="col-md-4 taps-nav no-padding"><button id="top-listen-world-tab" class="tabs-button" type="button">Top Listen World</button></div>
+            <div class="col-md-4 taps-nav no-padding"><button id="search-tab" class="tabs-button" type="button">Search</button></div>
+        </div>
+        <div id="tabs-content" class="">
+            <div id="tabs-1">
+                @foreach (SongDTO song in Model.TopFPT)
+                {
+                    <div class="col-md-12 no-padding inline-block song-item">
+                        <div class="col-md-1 no-padding text-center song-chart">
+                            @countA
+                        </div>
+
+                        <div class="col-md-9 no-padding">
+                            <div class="col-md-12">
+                                <div class="col-md-10 song-name no-padding">@song.SONG_NAME</div>
+                                <div class="col-md-2 duration">@song.GetMinutes()</div>
+                            </div>
+                            <div class="col-md-12 artist"> @song.ARTIST</div>
+                        </div>
+
+                        <div class="col-md-2 no-padding text-center song-action">
+                            <button title="Play this song" class="play-button" data-songid="@song.SONG_ID"><span class="glyphicon glyphicon-play"></span></button>&nbsp;&nbsp;
+                            <button title="Add to list" class="add-button" data-songid="@song.SONG_ID"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                    </div>
+                    <hr />
+                    countA++;
+                }
+            </div>
+            <div id="tabs-2">
+                @foreach (SongDTO song in Model.TopWorld)
+                {
+                    <div class="col-md-12 no-padding inline-block song-item">
+                        <div class="col-md-1 no-padding text-center song-chart">
+                            @countB
+                        </div>
+
+                        <div class="col-md-9 no-padding">
+                            <div class="col-md-12">
+                                <div class="col-md-10 song-name no-padding">@song.SONG_NAME</div>
+                                <div class="col-md-2 duration">@song.GetMinutes()</div>
+                            </div>
+                            <div class="col-md-12 artist"> @song.ARTIST</div>
+                        </div>
+
+                        <div class="col-md-2 no-padding text-center song-action">
+                            <button title="Play this song" class="play-button" data-songid="@song.SONG_ID"><span class="glyphicon glyphicon-play"></span></button>&nbsp;&nbsp;
+                            <button title="Add to list" class="add-button" data-songid="@song.SONG_ID"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                    </div>
+                    <hr />
+                    countB++;
+                }
+            </div>
+            <div id="tabs-3">
+                <div class="col-md-12 no-padding inline-block song-item">
+                    <p>Search</p>
+                </div>
+            </div>
+            <hr />
+            <div id="tags" class="col-md-12 no-padding">
+                <label>Tags :</label><br />
+                <p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p><p>xxx</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var musicPlay = document.getElementById("music-play");
+    var addToListURL = '@Url.Action("AddToDefaultList", "Song")'
+    $('.play-button').click(function () {
+
+        var songID = $(this).data('songid');
+        //alert(songID);
+        var source = '@Url.Action("GetSong", "Song")?songID=' + songID;
+        //alert(source);
+        $('#music-source').attr("src", source).detach().appendTo(musicPlay);
+        musicPlay.load();
+        musicPlay.play();
+    });
+
+    $('.add-button').click(function () {
+
+        var songID = $(this).data('songid');
+        //alert(songID);
+        $.ajax({
+            url: addToListURL,
+            type: "POST",
+            dataType: "json", // data respone from server
+            data: {songID:songID},
+
+            // After request
+            success: function (result) {
+                alert(result)
+            },
+            error: function () {
+                alert('fuck')
+            }
+        });
+
+
+    });
+
+    //mediaElement.seekable.start();  // Returns the starting time (in seconds)
+    //mediaElement.seekable.end();    // Returns the ending time (in seconds)
+    //mediaElement.currentTime = 20;
+    //mediaElement.onseeked = function () {
+    //    alert("Seek operation completed!");
+    //};
+
+    //mediaElement.addEventListener("seeked", function () {
+    //    alert("Seek operation completed!");
+    //});
+</script>

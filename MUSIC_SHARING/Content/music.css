@@ -1,0 +1,19 @@
+﻿
+#music-index{
+    float:left;
+}
+
+#music-upload{
+    float:left;
+    display:none;
+}
+#music-all-song{
+    float:left;
+    display:none;
+}
+
+
+#progress {
+    color: #3399FF;
+    font-size: xx-large;
+}

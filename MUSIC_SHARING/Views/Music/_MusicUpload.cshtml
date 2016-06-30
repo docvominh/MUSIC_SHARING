@@ -1,0 +1,110 @@
+﻿
+<link href="~/Content/music.css" rel="stylesheet" />
+
+<h2>Music upload</h2>
+
+<div class="col-lg-12">
+    <div class="col-lg-4">
+
+        @* Basic Form *@
+        @*<form method="post" action="@Url.Action("UploadMusic","Song")" enctype="multipart/form-data">
+                <input type="file" name="files" multiple />
+                <input type="submit" id="submit" value="Upload" />
+            </form>*@
+
+
+        @* Ajax Form *@
+        <form id="upload-form" method="post" enctype="multipart/form-data">
+            <input type="file" id="files" name="files" multiple accept="audio/*" />
+        </form>
+        <br />
+        <button type="button" id="submit" disabled>Fuck</button>
+
+    </div>
+    <div class="col-lg-8">
+        <div id="progress"></div>
+    </div>
+</div>
+<div class="col-lg-12" style="margin-top:100px">
+
+    <div id="file-choise"></div>
+</div>
+<script>
+
+    var uploadURL = "@Url.Action("UploadMusic","Song")";
+
+    $(function () {
+
+        // Check if file not select
+        $('#files').change(function () {
+            var fileArray = $('#files').val();
+            if (fileArray != '') {
+                $('#submit').removeAttr('disabled');
+
+                // Get file array
+                var formInput = document.querySelector("#files");
+                var files = formInput.files;
+                //alert(files.length);
+
+                var count = 1;
+                $('#file-choise').text('');
+                for (var i = 0; i < files.length; i++) {
+
+                    $('#file-choise').append('<p>' + count + '. ' + files[i].name + '</p>');
+                    count++;
+                }
+            } else {
+                $('#file-choise').text('');
+                $('#submit').prop('disabled', true);
+            }
+        });
+
+        $('#submit').click(function () {
+
+            // Get form data
+            var formData = new FormData($('form')[0]);
+
+            $.ajax({
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+
+                    xhr.upload.addEventListener("progress", function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            percentComplete = parseInt(percentComplete * 100);
+
+                            // Do something with progress here
+                            $('#progress').text('Uploading : ' + percentComplete + ' %');
+                            //console.log(percentComplete);
+
+                            if (percentComplete === 100) {
+
+                            }
+
+                        }
+                    }, false);
+
+                    return xhr;
+                },
+
+                url: uploadURL,
+                type: "POST",
+                dataType: "json", // data respone from server
+                data: formData,
+
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false,
+
+                // After request
+                success: function (result) {
+                    alert(result)
+                },
+                error: function () {
+                    alert('fuck')
+                }
+            });
+        });
+    });
+</script>

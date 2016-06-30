@@ -1,0 +1,87 @@
+﻿<div id="music-index" class="col-md-12 no-padding">
+    @Html.Partial("~/Views/Music/_MusicIndex.cshtml")
+</div>
+<div id="music-upload" class="col-md-12">
+    @Html.Partial("~/Views/Music/_MusicUpload.cshtml")
+</div>
+<div id="music-all-song" class="col-md-12">
+    @Html.Partial("~/Views/Music/_MusicAllSong.cshtml")
+</div>
+
+<script>
+    $(function () {
+
+        //----- Tabs start -----
+
+        $('#top-listen-fpt-tab').click(function () {
+            if ($('#tabs-1').css('display') == 'block') {
+
+            } else {
+                hideAllTaps();
+            }
+            $('#tabs-1').fadeIn();
+        });
+
+        $('#top-listen-world-tab').click(function () {
+            if ($('#tabs-2').css('display') == 'block') {
+
+            } else {
+                hideAllTaps();
+            }
+
+            $('#tabs-2').fadeIn();
+        });
+        $('#search-tab').click(function () {
+            if ($('#tabs-3').css('display') == 'block') {
+
+            } else {
+                hideAllTaps();
+            }
+
+            $('#tabs-3').fadeIn();
+        });
+
+        function hideAllTaps() {
+            $('#tabs-1').hide();
+            $('#tabs-2').hide();
+            $('#tabs-3').hide();
+        }
+
+        //----- Tabs end -----
+
+        $('#music-index-tab').click(function () {
+            if ($('#music-index').css('display') == 'block') {
+
+            } else {
+                fadeAll();
+            }
+            $('#music-index').delay('800').fadeIn();
+        });
+
+        $('#music-upload-tab').click(function () {
+            if ($('#music-upload').css('display') == 'block') {
+
+            } else {
+                fadeAll();
+            }
+            $('#music-upload').delay('800').fadeIn();
+        });
+
+        $('#music-all-song-tab').click(function () {
+            if ($('#music-all-song').css('display') == 'block') {
+
+            } else {
+                fadeAll();
+            }
+            $('#music-all-song').delay('800').fadeIn();
+        });
+    });
+
+    function fadeAll() {
+        $('#music-index').fadeOut();
+        $('#music-upload').fadeOut();
+        $('#music-all-song').fadeOut();
+    }
+</script>
+
+
